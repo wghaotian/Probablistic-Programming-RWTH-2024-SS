@@ -1,0 +1,3 @@
+If p = 0.1 or 0.2 or 0.3 or 0.4, the program won't stop; 
+
+Else, the program stops with the output 0. 
