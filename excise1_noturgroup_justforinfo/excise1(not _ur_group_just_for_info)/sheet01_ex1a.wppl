@@ -1,0 +1,10 @@
+var p = 0.4
+var RW = function (x){
+  return (x == 0) ? 0 : (flip(p) ? RW(x-1) : RW(x+1))
+}
+var y = 6
+var RW_from_y = function() {
+  return RW(y)
+}
+RW_from_y()
+//(b) When p in [0.6,1], this program can stop, because it's very likely to move left till the end(position 0). And when p in [0.1, 0.5], this program can't stop because it's hard to move left.
