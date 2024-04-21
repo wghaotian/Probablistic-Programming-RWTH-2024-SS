@@ -1,0 +1,5 @@
+runtime:
+	rejection and MCMC: the runtime for rejection method and MCMC method is almost the same, which is 0.7s for every 10000 samples.
+	enumeration: if maxExecutions is not defined(with the default value Infinity), the program will not stop. If the value of maxExecutions is set to 10000, it takes around 7-8s.
+value:
+	the value(the diagram) obtained from these three methods is almost the same when the  value of maxExecutions is not Infinity.
