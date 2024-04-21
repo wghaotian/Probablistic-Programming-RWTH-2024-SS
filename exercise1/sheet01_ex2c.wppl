@@ -24,5 +24,5 @@ var result = function (p, q, meal){
   return res(f1(0.5, 0.8, 0, 1));
 } 
 
-var dist = Infer({method: 'rejection', samples: 1000, model: result});
+var dist = Infer({method: 'rejection', samples: 10000, model: result});
 viz.auto(dist);
