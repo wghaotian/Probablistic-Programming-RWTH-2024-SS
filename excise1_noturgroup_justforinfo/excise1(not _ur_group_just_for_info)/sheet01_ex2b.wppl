@@ -1,11 +1,3 @@
-var enjoyPrevious = function(meal, p, q) {
-  return flip(meal ? q : p);
-};
-
-var mealToday = function(enjoyPrevious2, previousMeal) {
-  return enjoyPrevious2 ? previousMeal : flip(0.5);
-};
-
 var simulateMealChoice = function(p, q) {
   var days = 30;
 
@@ -18,16 +10,14 @@ var simulateMealChoice = function(p, q) {
   };
 
   var countKlassiker = function(day, klassikerCount, enjoyedYesterday, vegetarianCount) {
-    if (day === days ) {
-      return klassikerCount;
-    } else {
-      var chosenOption = mealToday(enjoyPrevious(enjoyedYesterday, p, q), enjoyedYesterday);
-      if (chosenOption) {
-        return countKlassiker(day + 1, klassikerCount + 1, chosenOption, vegetarianCount);
-      } else {
-        return countKlassiker(day + 1, klassikerCount, chosenOption, vegetarianCount + 1);
+    if (day === days) {
+      return klassikerCount;} else {
+        var chosenOption = mealToday(enjoyPrevious(enjoyedYesterday, p, q), enjoyedYesterday);
+        if (chosenOption) {
+          return countKlassiker(day + 1, klassikerCount + 1, chosenOption, vegetarianCount);} else {
+            return countKlassiker(day + 1, klassikerCount, chosenOption, vegetarianCount + 1);
+          }
       }
-    }
   };
 
   var klassikerCount = countKlassiker(0, 0, false, 0);
