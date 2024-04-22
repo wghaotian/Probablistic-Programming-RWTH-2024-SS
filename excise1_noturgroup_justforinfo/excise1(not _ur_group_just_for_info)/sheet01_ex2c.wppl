@@ -15,7 +15,7 @@ var simulateMealChoice = function(p, q) {
         return klassikerCountUpdated > 15 ? countKlassiker(0, 0, false) : countKlassiker(day + 1, klassikerCountUpdated, chosenOption);
       }
   };
-  return countKlassiker(0, 0, false);
+  return countKlassiker(1, 0, false);
 };
 
 var dist = Infer({ method: 'rejection', samples: 1000, model: function() { return simulateMealChoice(0.5, 0.8); } });
