@@ -1,0 +1,48 @@
+var smoker_blood_pressure = function()
+{
+  var smoke = flip (0.3)
+  if (smoke) {
+    var exercise = flip (0.6)
+    if (exercise) {var pressure = flip (0.3)
+    condition (pressure == true)}
+    else {var pressure = flip (0.6)
+         condition (pressure == true)}
+  }
+  else {    
+    var exercise = flip (0.7)
+    if (exercise) {var pressure = flip (0.1)
+                  condition (pressure == true)}
+    else {var pressure =flip(0.25)
+         condition (pressure == true)}
+    }
+  return (smoke == true)
+}
+
+var dist_enum1000 = Infer({method: 'enumerate',maxExecutions: 1000}, smoker_blood_pressure)
+print("the result with enumerate, 1000 maxExecutions:")
+print(expectation(dist_enum1000)) 
+viz.auto(dist_enum1000)
+var dist_rej1000 = Infer({method: 'rejection', samples:1000}, smoker_blood_pressure)
+print("the result with rejection, 1000 samples:")
+print(expectation(dist_rej1000))
+viz.auto(dist_rej1000)
+var distMCMC_1000 = Infer({method: 'MCMC', samples:1000},smoker_blood_pressure)
+print("the result with MCMC, 10000 samples:")
+print(expectation(distMCMC_1000)) 
+viz.auto(distMCMC_1000)
+
+var dist_enum10000 = Infer({method: 'enumerate',maxExecutions: 10000}, smoker_blood_pressure)
+print("the result with enumerate, 10000 maxExecutions:")
+print(expectation(dist_enum10000)) 
+viz.auto(dist_enum10000)
+var dist_rej10000 = Infer({method: 'rejection', samples:10000}, smoker_blood_pressure)
+print("the result with rejection, 10000 samples:")
+print(expectation(dist_rej10000))
+viz.auto(dist_rej10000)
+var distMCMC_10000 = Infer({method: 'MCMC', samples:10000},smoker_blood_pressure)
+print("the result with MCMC, 10000 samples:")
+print(expectation(distMCMC_10000)) 
+viz.auto(distMCMC_10000) 
+
+// as we can see, rejection sampling and enumeration produce similiar results even with smaller
+// number of samples and iterations, while MCMC needs more samples to get there

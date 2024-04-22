@@ -1,0 +1,38 @@
+var blood_pressure = function() // general model of the given task
+{
+  var smoke = flip (0.3)
+  if (smoke) {
+    var exercise = flip (0.6)
+    if (exercise) {return flip (0.3)}
+    else {return flip (0.6)}
+  }
+  else {    
+    var exercise = flip (0.7)
+    if (exercise) {return flip (0.1)}
+    else {return flip(0.25)}
+    }
+  
+}
+var smoker_blood_pressure = function() // counts the probability of person being a smoker
+{
+  var smoke = flip (0.3)
+  if (smoke) {
+    var exercise = flip (0.6)
+    if (exercise) {var pressure = flip (0.3)
+    condition (pressure == true)}
+    else {var pressure = flip (0.6)
+         condition (pressure == true)}
+  }
+  else {    
+    var exercise = flip (0.7)
+    if (exercise) {var pressure = flip (0.1)
+                  condition (pressure == true)}
+    else {var pressure =flip(0.25)
+         condition (pressure == true)}
+    }
+  return (smoke == true)
+}
+var dist = Infer({method: 'rejection', samples:1000},smoker_blood_pressure)
+print("the probability of the person being a smoker is")
+print(expectation(dist)) 
+viz.auto(dist) 
