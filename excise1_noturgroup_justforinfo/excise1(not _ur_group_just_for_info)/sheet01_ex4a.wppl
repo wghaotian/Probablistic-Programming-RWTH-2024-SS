@@ -1,0 +1,18 @@
+var n = 100
+
+var samples_in_circle = function (m) { 
+  //radius = 1
+  var x = uniform(-1, 1)
+  var y = uniform(-1, 1)
+  //if (x*x + y*y <=1), d = 1;else d=0
+  var d = (x*x + y*y <= 1)
+  if (m == 0) return d
+  //increase the number of dots that appear inside the circle
+  return samples_in_circle(m-1) + d
+}
+
+var approx_of_pi = function() {return (4 * samples_in_circle(n)) / n}
+// Optional for plotting the distribution
+var distr_approx_of_pi = Infer({method: 'rejection', samples: 2000}, approx_of_pi)
+viz.auto(distr_approx_of_pi)
+approx_of_pi()
