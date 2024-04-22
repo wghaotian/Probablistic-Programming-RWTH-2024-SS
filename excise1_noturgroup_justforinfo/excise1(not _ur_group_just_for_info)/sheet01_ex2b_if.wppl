@@ -22,7 +22,7 @@ var countKlassiker = function(day, klassikerCount, enjoyedYesterday, vegetarianC
   }
 };
 
-return countKlassiker(0, 0, false, 0);
+return countKlassiker(1, 0, false, 0);
 };
 
 var dist = Infer({ method: 'rejection', samples: 1000, model: function() { return simulateMealChoice(0.5, 0.8); } });
