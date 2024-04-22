@@ -20,7 +20,7 @@ var simulateMealChoice = function(p, q) {
       }
   };
 
-  var klassikerCount = countKlassiker(0, 0, false, 0);
+  var klassikerCount = countKlassiker(1, 0, false, 0);
   condition(klassikerCount <= 15);
   return klassikerCount;
 };
