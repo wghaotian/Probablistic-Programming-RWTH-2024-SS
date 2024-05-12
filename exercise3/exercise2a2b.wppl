@@ -1,0 +1,43 @@
+// exercise2ab
+var metropolisHelper = function(n, f, prop, x_old, samples) {
+  if (samples.length === n) {
+        return samples;
+  } else {
+        // Generate a proposal sample from the proposal distribution
+        var x_new = sample(prop(x_old));
+        
+        // Calculate acceptance probability
+        var acceptance_prob = Math.min(1, f(x_new) / f(x_old));
+        
+        // Determine whether to accept the proposal
+        if (flip(acceptance_prob)) {
+            // Accept the proposal
+            return metropolisHelper(n, f, prop, x_new, samples.concat(x_new));
+        } else {
+            // Reject the proposal and keep the old sample
+            return metropolisHelper(n, f, prop, x_old, samples.concat(x_old));
+        }
+    }
+};
+
+var metropolis = function(n, f, prop) {
+  metropolisHelper(n, f, prop, 0.2, [])
+}
+
+
+var prop = function(mean){
+  Gaussian({mu: mean, sigma: 0.3});
+}
+
+var n = 20000; // Number of samples
+var f1 = function(x) { 
+  var result = 0.5 * Math.exp(-(Math.pow(x-2, 2) / 2)) + 0.5 * Math.exp(-(Math.pow(x+2, 2) / 2));
+  return result;
+}; // Probability density function
+var f2 = function(x) {
+  var result = (x > -3 && x < 3) ? ( -0.1319 * Math.pow(x, 4) + 1.132 * Math.pow(x, 2) + 0.5) : 0
+  return result
+}
+
+var samples = metropolis(n, f2, prop);
+samples

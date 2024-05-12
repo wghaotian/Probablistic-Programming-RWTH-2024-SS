@@ -1,0 +1,24 @@
+// exercise3a
+var mcmc = false;
+var n = 1000;
+
+// Function to generate a d-dimensional point within the unit cube
+var generatePoint = function(d) {
+    return repeat(d, function() {
+        return sample(Uniform({a: -1, b: 1}));
+    });
+};
+
+// Function to check if a d-dimensional point lies inside the unit ball
+var isInUnitBall = function(point) {
+    var squaredNorm = sum(map(function(x) { return x * x; }, point));
+    return squaredNorm <= 1;
+};
+
+var model = function() {
+    var point = generatePoint(2); // Change the dimension here
+    condition(isInUnitBall(point));
+    return point;
+};
+
+viz.auto(Infer({method: mcmc ? "MCMC" : "rejection", samples: n}, model));
