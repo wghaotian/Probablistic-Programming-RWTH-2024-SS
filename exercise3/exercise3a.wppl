@@ -1,5 +1,5 @@
 // exercise3a
-var mcmc = false;
+var mcmc = true;
 var n = 1000;
 
 // Function to generate a d-dimensional point within the unit cube
@@ -16,9 +16,18 @@ var isInUnitBall = function(point) {
 };
 
 var model = function() {
-    var point = generatePoint(2); // Change the dimension here
+    var point = generatePoint(10); // Change the dimension here
     condition(isInUnitBall(point));
     return point;
 };
 
+var t1 = Date.now()
 viz.auto(Infer({method: mcmc ? "MCMC" : "rejection", samples: n}, model));
+var t2 = Date.now()
+var time_diff = (t2 - t1) / 1000
+if (mcmc == true) {
+  console.log("time of mcmc: ", time_diff)
+}
+else {
+  console.log("time of rejection: ", time_diff)
+}

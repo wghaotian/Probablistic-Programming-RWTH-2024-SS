@@ -1,0 +1,7 @@
+The larger σ^2 is, the more samples will be rejected. That means most of x_{i+1} is equal to x_i.
+Test data: 
+the number of total samples is 20000;
+f(x) = 0.5 * Math.exp(-(Math.pow(x-2, 2) / 2)) + 0.5 * Math.exp(-(Math.pow(x+2, 2) / 2));
+when σ^2 = 0.3: the number of accepted samples is 18377;
+when σ^2 = 10: the number of accepted samples is 4757;
+when σ^2 = 0.01: the number of accepted samples is 19932;
