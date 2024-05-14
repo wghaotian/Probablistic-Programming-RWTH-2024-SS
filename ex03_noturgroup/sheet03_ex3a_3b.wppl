@@ -1,0 +1,16 @@
+var model = function() {
+    // Task B: set the d=10 (dimension here)
+    var d = 10;
+    var point = repeat(d, function() {
+        return sample(Uniform({a: -1, b: 1}));
+    });
+
+    var squaredNorm = sum(map(function(x) { return x * x; }, point));
+    condition(squaredNorm <= 1);
+
+    return point;
+};
+
+// Two methods
+//viz.auto(Infer({method: "rejection", samples: 1000}, model));
+viz.auto(Infer({method: "MCMC" , samples: 1000}, model));

@@ -1,0 +1,44 @@
+var metropolis = function(n, f, prop) {
+  var innerMetropolis = function(x_old, samples) {
+    if (samples.length == n) {
+      return samples;
+    } else {
+      var x_new = sample(prop(x_old));
+      var acceptance_prob = Math.min(1, f(x_new) / f(x_old));
+
+      if (flip(acceptance_prob)) {
+        return innerMetropolis(x_new, samples.concat(x_new));
+      } else {
+        return innerMetropolis(x_old, samples.concat(x_old));
+      }
+    }
+  };
+
+  return innerMetropolis(0.2, []);
+};
+
+var prop = function(mean) {
+  return Gaussian({mu: mean, sigma: 0.3});
+};
+
+// Task 2(b)
+var n = 20000;
+
+var f1 = function(x) { 
+  var result = 0.5 * Math.exp(-(Math.pow(x-2, 2) / 2)) + 0.5 * Math.exp(-(Math.pow(x+2, 2) / 2));
+  return result;
+}; 
+var samples = metropolis(n, f1, prop);
+
+//var f2 = function(x) {
+//  var result = (x > -3 && x < 3) ? ( -0.1319 * Math.pow(x, 4) + 1.132 * Math.pow(x, 2) + 0.5) : 0
+//  return result
+//}
+//var samples = metropolis(n, f2, prop);
+
+//show the samples by array
+//samples
+
+//visualization of samples (graph in PDF)
+viz.auto(samples);
+
