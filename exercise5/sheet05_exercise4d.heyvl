@@ -1,0 +1,24 @@
+// 4d
+// pre [true] can reach the post condition [x == y0 && y == x0], 
+// that means all pre conditions can reach this post condition through this program
+proc check1a_1(x0: UInt, y0: UInt) -> (x: UInt, y: UInt, z: UInt)
+pre [x0 == y0]
+post [x == y0 && y == x0]
+{
+    x = x0
+    y = y0
+    z = x
+    x = y
+    y = z
+}
+
+proc check1a_2(x0: UInt, y0: UInt) -> (x: UInt, y: UInt, z: UInt)
+pre [false]
+post [x == y0 && y == x0]
+{
+    x = x0
+    y = y0
+    z = x
+    x = y
+    y = z   
+}

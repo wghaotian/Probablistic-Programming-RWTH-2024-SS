@@ -1,0 +1,19 @@
+// 4f
+// The result of proc is correct. 
+// the counter example for coproc is: x=0, y=0
+// since y == 0 is in not [y!=0], but it can not reach the postcondition not [res * y == x].
+// therefore it is incorrect for coprop. We can change the pre condition to [true]
+@wp
+proc e4f_p(x: UReal, y: UReal) -> (res: UReal)
+    pre [y != 0]
+    post [res * y == x]
+{
+    res = x / y
+}
+@wp
+coproc e4f_cop(x: UReal, y: UReal) -> (res: UReal)
+    pre [true]
+    post [res * y == x]
+{
+    res = x / y
+}

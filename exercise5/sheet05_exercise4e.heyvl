@@ -1,0 +1,18 @@
+// 4e
+// proc e4e_p ensures that the precondition satisfies [x <= y], can reach the post condition [res == x \cap y]
+// and coproc e4e_cop ensures that the precondition satisfies not [x <= y] i.e. [x > y], can reach the post condition not [res == x \cap y] i.e. [res != x \cap y]
+// therefore  [x <= y] = wp[res = x]([res == x \cap y]).
+@wp
+coproc e4e_cop(x: UInt, y: UInt) -> (res: UInt)
+    pre [x <= y]
+    post [res == x \cap y]
+{
+    res = x
+}
+@wp
+proc e4e_p(x: UInt, y: UInt) -> (res: UInt)
+    pre [x <= y]
+    post [res == x \cap y]
+{
+    res = x
+}

@@ -1,0 +1,90 @@
+// 4b
+@wp
+proc minimum(x: UInt, y: UInt) -> (res: UInt)
+pre [true]
+post [res == x \cap y]
+{
+    if x < y {
+        res = x
+    } else {
+        res = y
+    }
+}
+
+// 4c
+@wp
+proc check1a(x0: UInt, y0: UInt) -> (x: UInt, y: UInt, z: UInt)
+pre [true]
+post [x == y0 && y == x0]
+{
+    x = x0
+    y = y0
+    z = x
+    x = y
+    y = z
+}
+
+// 4d
+// pre [true] can reach the post condition [x == y0 && y == x0], 
+// that means all pre conditions can reach this post condition through this program
+proc check1a_1(x0: UInt, y0: UInt) -> (x: UInt, y: UInt, z: UInt)
+pre [x0 == y0]
+post [x == y0 && y == x0]
+{
+    x = x0
+    y = y0
+    z = x
+    x = y
+    y = z
+}
+
+proc check1a_2(x0: UInt, y0: UInt) -> (x: UInt, y: UInt, z: UInt)
+pre [false]
+post [x == y0 && y == x0]
+{
+    x = x0
+    y = y0
+    z = x
+    x = y
+    y = z   
+}
+
+
+// 4e
+// proc e4e_p ensures that the precondition satisfies [x <= y], can reach the post condition [res == x \cap y]
+// and coproc e4e_cop ensures that the precondition satisfies not [x <= y] i.e. [x > y], can reach the post condition not [res == x \cap y] i.e. [res != x \cap y]
+// therefore  [x <= y] = wp[res = x]([res == x \cap y]).
+@wp
+coproc e4e_cop(x: UInt, y: UInt) -> (res: UInt)
+    pre [x <= y]
+    post [res == x \cap y]
+{
+    res = x
+}
+@wp
+proc e4e_p(x: UInt, y: UInt) -> (res: UInt)
+    pre [x <= y]
+    post [res == x \cap y]
+{
+    res = x
+}
+
+// 4f
+// The result of proc is correct. 
+// the counter example for coproc is: x=0, y=0
+// since y == 0 is in not [y!=0], but it can not reach the postcondition not [res * y == x].
+// therefore it is incorrect for coprop. We can change the pre condition to [true]
+@wp
+proc e4f_p(x: UReal, y: UReal) -> (res: UReal)
+    pre [y != 0]
+    post [res * y == x]
+{
+    res = x / y
+}
+@wp
+coproc e4f_cop(x: UReal, y: UReal) -> (res: UReal)
+    pre [true]
+    post [res * y == x]
+{
+    res = x / y
+}
