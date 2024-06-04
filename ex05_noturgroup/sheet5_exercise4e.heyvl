@@ -1,0 +1,23 @@
+@wp
+proc min_p(x:UInt, y:UInt) -> (res:UInt) //@add wp
+pre[x <=  y]
+post[res == x \cap y]
+{
+
+    res = x
+}
+
+// here we want to compute the minimum between two variables, x and y
+// for proc we only care that x is minimum, so the condition x < y would also be verified
+//corproc is calculating the maximum value that x is allowed to have, so it checks if  situation 
+// where x = y is also considered
+
+@wlp
+coproc min_c(x:UInt, y:UInt) -> (res:UInt)
+pre[x <= y]
+post[res == x \cap y]
+{
+
+    res = x
+}
+

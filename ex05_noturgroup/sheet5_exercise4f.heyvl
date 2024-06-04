@@ -1,0 +1,32 @@
+@wp
+proc division_p(x:UReal, y:UReal) -> (res:UReal)
+pre[y != 0]
+post[res*y == x]
+{
+
+    res = x/y
+}
+
+
+@wlp
+coproc division_c(x:UReal, y:UReal) -> (res:UReal)
+pre[(y != 0) ]  // || (x == 0 && y == 0)
+post[res*y == x]
+{
+
+    res = x/y
+}
+
+// we can observe that the first program is verified, while the second program gives an error
+// the reason for that is that the second problem has found an example where x = 0 and y =0 and in this case
+// the precondition y ! = 0 is not neccessary 
+// in order to make the second program verify, we can add another condition
+
+@wlp
+coproc division_c_true(x:UReal, y:UReal) -> (res:UReal)
+pre[(y != 0)   || (x == 0 && y == 0)]
+post[res*y == x]
+{
+
+    res = x/y
+}

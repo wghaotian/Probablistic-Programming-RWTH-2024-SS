@@ -1,0 +1,12 @@
+@wp
+proc exchange(x0:UInt, y0: UInt) -> (x:UInt, y:UInt, z:UInt)
+pre[true]
+post[x == y0 && y == x0]
+{
+x = x0
+y = y0
+z = x 
+x = y
+y = z
+
+}

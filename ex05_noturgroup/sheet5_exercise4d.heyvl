@@ -1,0 +1,30 @@
+@wp
+proc exchange1(x0:UInt, y0: UInt) -> (x:UInt, y:UInt, z:UInt)
+pre[x0 > 0]
+post[x == y0 && y == x0]
+{
+x = x0
+y = y0
+z = x 
+x = y
+y = z
+
+}
+
+
+ 
+
+@wp
+proc exchange2(x0:UInt, y0: UInt) -> (x:UInt, y:UInt, z:UInt)
+pre[y0> 0]
+post[x == y0 && y == x0]
+{
+x = x0
+y = y0
+z = x 
+x = y
+y = z
+
+}
+
+// verifies because as we showed before, this program is true under any precondtion, since posctondition always holds

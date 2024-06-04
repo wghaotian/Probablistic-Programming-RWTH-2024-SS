@@ -1,0 +1,14 @@
+proc minimum(x: UInt, y: UInt) -> (res:UInt)
+    pre[true]
+    post[res == x \cap y]
+    {
+
+        if (x>y) 
+        {
+            res = y
+        }
+        else
+        {
+            res = x
+        }
+    }
